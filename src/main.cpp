@@ -26,14 +26,9 @@ int main(int argc, char** argv)
     decompressor.push(boost::iostreams::gzip_decompressor());
     decompressor.push(file);
 
-    std::istream_iterator<char> it(decompressor >> std::noskipws), end;
-
     int i = 1;
-    for(; it != end; it++)
+    for(std::string line; getline(decompressor, line); i++)
     {
-        if (*it == '\n') i++;
         std::cout << "\rLines in file: " << i << "          ";
     }
-    std::cout << "\n";
-
 }
